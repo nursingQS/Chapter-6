@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric Nursing Flashcards - Chapter 6: Childhood Communicable & Infectious Diseases</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            height: 96vh;
+            background: #f8fdff;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(66, 133, 244, 0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #4285f4;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1565c0, #4285f4);
+            color: white;
+            padding: 12px 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M50,20 Q70,30 80,50 Q70,70 50,80 Q30,70 20,50 Q30,30 50,20 Z" fill="white"/><circle cx="50" cy="50" r="15" fill="white"/><path d="M40,35 L60,35 L60,65 L40,65 Z" fill="white"/><polygon points="50,20 60,40 50,50 40,40" fill="white"/></svg>');
+            background-size: 80px 80px;
+        }
+        
+        .header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            position: relative;
+            color: #e3f2fd;
+            line-height: 1.2;
+        }
+        
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            color: #bbdefb;
+            margin-bottom: 8px;
+        }
+        
+        .progress {
+            background: #1565c0;
+            height: 6px;
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #64b5f6, #4285f4);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .section-nav {
+            display: flex;
+            gap: 6px;
+            padding: 8px 10px;
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            border-bottom: 1px solid #64b5f6;
+            flex-shrink: 0;
+            overflow-x: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-btn {
+            padding: 5px 10px;
+            border: 2px solid #64b5f6;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1565c0;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .section-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(100, 181, 246, 0.4);
+        }
+        
+        .section-btn.active {
+            background: linear-gradient(135deg, #64b5f6, #4285f4);
+            color: white;
+            border-color: #1565c0;
+            box-shadow: 0 6px 12px rgba(100, 181, 246, 0.5);
+        }
+        
+        .flashcard {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #f8fdff;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .question-container {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 6px solid #64b5f6;
+            box-shadow: 0 4px 8px rgba(66, 133, 244, 0.1);
+            flex-shrink: 0;
+        }
+        
+        .question-icon {
+            background: linear-gradient(135deg, #1565c0, #64b5f6);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(21, 101, 192, 0.4);
+        }
+        
+        .question {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: #0d47a1;
+            flex-grow: 1;
+            font-weight: 500;
+            overflow-wrap: break-word;
+            hyphens: auto;
+        }
+        
+        .multiple-select-indicator {
+            background: #d32f2f;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: 6px;
+            white-space: nowrap;
+            box-shadow: 0 3px 6px rgba(211, 47, 47, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 8px;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .option {
+            padding: 8px 10px;
+            border: 2px solid #bbdefb;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.85rem;
+            line-height: 1.3;
+            flex-shrink: 0;
+            min-height: 45px;
+        }
+        
+        .option:hover {
+            background: #e3f2fd;
+            border-color: #64b5f6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(100, 181, 246, 0.2);
+        }
+        
+        .option-letter {
+            background: #bbdefb;
+            color: #1565c0;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            border: 2px solid #90caf9;
+        }
+        
+        /* CORRECT - ALWAYS GREEN */
+        .option.correct {
+            background: #c8e6c9;
+            border-color: #388e3c;
+            color: #1b5e20;
+        }
+        
+        .option.correct .option-letter {
+            background: #388e3c;
+            color: white;
+            border-color: #388e3c;
+        }
+        
+        /* INCORRECT - ALWAYS RED */
+        .option.incorrect {
+            background: #ffcdd2;
+            border-color: #d32f2f;
+            color: #b71c1c;
+        }
+        
+        .option.incorrect .option-letter {
+            background: #d32f2f;
+            color: white;
+            border-color: #d32f2f;
+        }
+        
+        .option.selected {
+            background: #e3f2fd;
+            border-color: #64b5f6;
+            color: #1565c0;
+        }
+        
+        .option.selected .option-letter {
+            background: #64b5f6;
+            color: white;
+            border-color: #4285f4;
+        }
+        
+        .feedback {
+            padding: 8px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .feedback.correct {
+            background: #c8e6c9;
+            border: 3px solid #388e3c;
+            color: #1b5e20;
+            display: flex;
+        }
+        
+        .feedback.incorrect {
+            background: #ffcdd2;
+            border: 3px solid #d32f2f;
+            color: #b71c1c;
+            display: flex;
+        }
+        
+        .feedback-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background: #bbdefb;
+            border-top: 2px solid #90caf9;
+            flex-shrink: 0;
+            gap: 8px;
+        }
+        
+        .counter {
+            font-weight: bold;
+            color: #1565c0;
+            font-size: 0.9rem;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 2px solid #64b5f6;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+        
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #1565c0, #64b5f6);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(21, 101, 192, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #4285f4, #1565c0);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(66, 133, 244, 0.4);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #ffb300, #ff8f00);
+            color: #212529;
+        }
+        
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(255, 179, 0, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(211, 47, 47, 0.4);
+        }
+        
+        .rationale {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 3px solid #ffb300;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 8px;
+            display: none;
+            box-shadow: 0 4px 12px rgba(255, 179, 0, 0.2);
+            flex-shrink: 0;
+            overflow: hidden;
+            max-height: 120px;
+        }
+        
+        .rationale.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .rationale h4 {
+            color: #ff8f00;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .rationale p {
+            color: #856404;
+            line-height: 1.4;
+            font-size: 0.8rem;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stats {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            margin-top: 4px;
+            flex-wrap: wrap;
+            flex-shrink: 0;
+        }
+        
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cancel-selection {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            color: white;
+            margin: 0 auto 8px auto;
+            display: none;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3);
+            flex-shrink: 0;
+        }
+        
+        .cancel-selection:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(211, 47, 47, 0.4);
+        }
+        
+        .cancel-selection.show {
+            display: flex;
+        }
+        
+        .multiple-select-instructions {
+            text-align: center;
+            color: #d32f2f;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            background: #fff3cd;
+            padding: 6px;
+            border-radius: 8px;
+            border: 2px solid #ffeaa7;
+            flex-shrink: 0;
+        }
+        
+        .matching-container {
+            background: linear-gradient(135deg, #f8fdff, #e3f2fd);
+            border-radius: 8px;
+            padding: 10px;
+            border: 2px solid #bbdefb;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 0;
+        }
+        
+        .matching-question {
+            font-size: 0.85rem;
+            color: #0d47a1;
+            font-weight: 500;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            border: 2px solid #bbdefb;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            max-height: 3em;
+            flex-shrink: 0;
+        }
+        
+        .matching-options {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 5px;
+            overflow: hidden;
+            padding: 2px;
+            min-height: 0;
+        }
+        
+        .matching-option {
+            padding: 8px;
+            border: 2px dashed #90caf9;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4285f4;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            overflow: hidden;
+            line-height: 1.2;
+        }
+        
+        .matching-option:hover {
+            background: #e3f2fd;
+            border-style: solid;
+            border-color: #64b5f6;
+        }
+        
+        .matching-option.correct {
+            background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+            border-color: #388e3c;
+            border-style: solid;
+            color: #1b5e20;
+        }
+        
+        .matching-option.incorrect {
+            background: linear-gradient(135deg, #ffcdd2, #ef9a9a);
+            border-color: #d32f2f;
+            border-style: solid;
+            color: #b71c1c;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* Remove all scrollbars */
+        .options,
+        .matching-options,
+        .rationale,
+        .container,
+        .flashcard,
+        body {
+            overflow: hidden !important;
+            -ms-overflow-style: none !important;
+            scrollbar-width: none !important;
+        }
+        
+        .options::-webkit-scrollbar,
+        .matching-options::-webkit-scrollbar,
+        .rationale::-webkit-scrollbar {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                height: 98vh;
+            }
+            
+            .section-btn {
+                min-width: 100px;
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+            
+            .matching-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 10px 12px;
+            }
+            
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .navigation {
+                padding: 8px 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 6px;
+            }
+            
+            .counter {
+                order: -1;
+                width: 100%;
+                text-align: center;
+                margin-bottom: 4px;
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .question {
+                font-size: 0.85rem;
+            }
+            
+            .option {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+                min-height: 40px;
+            }
+            
+            .question-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+            
+            .option-letter {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
+            }
+        }
+        
+        @media (max-height: 700px) {
+            .container {
+                height: 99vh;
+            }
+            
+            .header {
+                padding: 8px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.1rem;
+            }
+            
+            .header .subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .question-container {
+                padding: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .question {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+            
+            .option {
+                padding: 6px 8px;
+                min-height: 35px;
+                font-size: 0.75rem;
+            }
+            
+            .navigation {
+                padding: 6px 8px;
+            }
+            
+            .rationale {
+                max-height: 80px;
+                padding: 8px;
+            }
+            
+            .feedback {
+                padding: 6px 8px;
+                font-size: 0.75rem;
+            }
+            
+            .option-letter {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            .stats {
+                display: none;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            .question-container {
+                padding: 8px;
+            }
+            
+            .question-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            
+            .option {
+                min-height: 30px;
+                padding: 4px 6px;
+                font-size: 0.7rem;
+            }
+            
+            .option-letter {
+                width: 18px;
+                height: 18px;
+                font-size: 0.65rem;
+            }
+            
+            .btn {
+                padding: 5px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .rationale {
+                max-height: 60px;
+                padding: 6px;
+            }
+            
+            .rationale p {
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Chapter 06: Childhood Communicable and Infectious Diseases</h1>
+            <div class="subtitle">Infection Control Theme - Medical Blue & Protective Colors</div>
+            <div class="stats">
+                <div class="stat">📚 42 Questions</div>
+                <div class="stat">🎯 Immediate Feedback</div>
+                <div class="stat">🦠 Infectious Disease Focus</div>
+                <div class="stat">💉 Immunization Content</div>
+            </div>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        
+        <div class="section-nav">
+            <button class="section-btn active" onclick="setSection('multiple-choice')">Multiple Choice (32)</button>
+            <button class="section-btn" onclick="setSection('multiple-response')">Multiple Response (10)</button>
+            <button class="section-btn" onclick="setSection('matching')">Matching (5)</button>
+            <button class="section-btn" onclick="setSection('all')">All Mixed (47)</button>
+        </div>
+        
+        <div class="flashcard">
+            <div class="question-container">
+                <div class="question-icon" id="questionNumber">1</div>
+                <div class="question" id="question"></div>
+                <div class="multiple-select-indicator" id="multipleSelectIndicator" style="display: none;">Multiple Answers</div>
+            </div>
+            
+            <div class="multiple-select-instructions" id="multipleSelectInstructions" style="display: none;">
+                💡 Select ALL correct answers
+            </div>
+            
+            <div class="options" id="options"></div>
+            
+            <div class="matching-container" id="matchingContainer" style="display: none;">
+                <div class="matching-question" id="matchingQuestion"></div>
+                <div class="matching-options" id="matchingOptions"></div>
+            </div>
+            
+            <button class="btn cancel-selection" id="cancelBtn" onclick="cancelSelection()">
+                🔄 Reset
+            </button>
+            
+            <div class="feedback" id="feedback">
+                <div class="feedback-icon" id="feedbackIcon"></div>
+                <div id="feedbackText"></div>
+            </div>
+            <div class="rationale" id="rationale">
+                <h4>💡 Rationale:</h4>
+                <p id="rationaleText"></p>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()">
+                ⬅️ Prev
+            </button>
+            <div class="counter" id="counter">1/32</div>
+            <button class="btn btn-warning" id="submitBtn" onclick="submitAnswer()" style="display: none;">
+                ✅ Submit
+            </button>
+            <button class="btn btn-primary" id="nextBtn" onclick="nextCard()">
+                Next ➡️
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Chapter 6 Data - Childhood Communicable and Infectious Diseases
+        const sections = {
+            'multiple-choice': [
+                {
+                    question: "Pertussis vaccination should begin at which age?",
+                    options: ["Birth", "2 months", "6 months", "12 months"],
+                    correct: 1,
+                    rationale: "The acellular pertussis vaccine is recommended by the American Academy of Pediatrics beginning at age 6 weeks. Infants are at greater risk for complications of pertussis. The first dose is usually given at the 2-month well-child visit."
+                },
+                {
+                    question: "A mother tells the nurse that she does not want her infant immunized because of the discomfort associated with injections. What should the nurse explain?",
+                    options: [
+                        "This cannot be prevented.",
+                        "Infants do not feel pain as adults do.",
+                        "This is not a good reason for refusing immunizations.",
+                        "A topical anesthetic can be applied before injections are given."
+                    ],
+                    correct: 3,
+                    rationale: "To minimize the discomfort associated with intramuscular injections, a topical anesthetic agent can be used on the injection site. These include EMLA (eutectic mixture of local anesthetic) and vapor coolant sprays."
+                },
+                {
+                    question: "A 4-month-old infant comes to the clinic for a well-infant checkup. Immunizations she should receive are DTaP (diphtheria, tetanus, acellular pertussis) and IPV (inactivated poliovirus vaccine). She is recovering from a cold but is otherwise healthy and afebrile. Her older sister has cancer and is receiving chemotherapy. Nursing considerations should include which?",
+                    options: [
+                        "DTaP and IPV can be safely given.",
+                        "DTaP and IPV are contraindicated because she has a cold.",
+                        "IPV is contraindicated because her sister is immunocompromised.",
+                        "DTaP and IPV are contraindicated because her sister is immunocompromised."
+                    ],
+                    correct: 0,
+                    rationale: "These immunizations can be given safely. Serious illness is a contraindication. A mild illness with or without fever is not a contraindication. These are not live vaccines, so they do not pose a risk to her sister."
+                },
+                {
+                    question: "Which serious reaction should the nurse be alert for when administering vaccines?",
+                    options: ["Fever", "Skin irritation", "Allergic reaction", "Pain at injection site"],
+                    correct: 2,
+                    rationale: "Each vaccine administration carries the risk of an allergic reaction. The nurse must be prepared to intervene if the child demonstrates signs of a severe reaction."
+                },
+                {
+                    question: "Which muscle is contraindicated for the administration of immunizations in infants and young children?",
+                    options: ["Deltoid", "Dorsogluteal", "Ventrogluteal", "Anterolateral thigh"],
+                    correct: 1,
+                    rationale: "The dorsogluteal site is avoided in children because of the location of nerves and veins. The ventrogluteal and anterolateral thigh sites can safely be used for the administration of vaccines to infants."
+                },
+                {
+                    question: "Which is described as an elevated, circumscribed skin lesion that is less than 1 cm in diameter and filled with serous fluid?",
+                    options: ["Cyst", "Papule", "Pustule", "Vesicle"],
+                    correct: 3,
+                    rationale: "A vesicle is elevated, circumscribed, superficial, smaller than 1 cm in diameter, and filled with serous fluid."
+                },
+                {
+                    question: "Which vitamin supplementation has been found to reduce both morbidity and mortality in measles?",
+                    options: ["A", "B1", "C", "Zinc"],
+                    correct: 0,
+                    rationale: "Evidence suggests that vitamin A supplementation reduces both morbidity and mortality in measles."
+                },
+                {
+                    question: "What does impetigo ordinarily results in?",
+                    options: ["No scarring", "Pigmented spots", "Atrophic white scars", "Slightly depressed scars"],
+                    correct: 0,
+                    rationale: "Impetigo tends to heal without scarring unless a secondary infection occurs."
+                },
+                {
+                    question: "What often causes cellulitis?",
+                    options: ["Herpes zoster", "Candida albicans", "Human papillomavirus", "Streptococci or staphylococci"],
+                    correct: 3,
+                    rationale: "Streptococci, staphylococci, and Haemophilus influenzae are the organisms usually responsible for cellulitis."
+                },
+                {
+                    question: "Lymphangitis (streaking) is frequently seen in what?",
+                    options: ["Cellulitis", "Folliculitis", "Impetigo contagiosa", "Staphylococcal scalded skin"],
+                    correct: 0,
+                    rationale: "Lymphangitis is frequently seen in cellulitis. If it is present, hospitalization is usually required for parenteral antibiotics."
+                },
+                {
+                    question: "What is most important in the management of cellulitis?",
+                    options: [
+                        "Burow solution compresses",
+                        "Oral or parenteral antibiotics",
+                        "Topical application of an antibiotic",
+                        "Incision and drainage of severe lesions"
+                    ],
+                    correct: 1,
+                    rationale: "Oral or parenteral antibiotics are indicated depending on the extent of the cellulitis. Warm water compresses may be indicated for limited cellulitis."
+                },
+                {
+                    question: "What causes warts?",
+                    options: ["A virus", "A fungus", "A parasite", "Bacteria"],
+                    correct: 0,
+                    rationale: "Human warts are caused by the human papillomavirus. Infection with fungus, parasites, or bacteria does not result in warts."
+                },
+                {
+                    question: "What is the primary treatment for warts?",
+                    options: ["Vaccination", "Local destruction", "Corticosteroids", "Specific antibiotic therapy"],
+                    correct: 1,
+                    rationale: "Local destructive therapy is individualized according to location, type, and number; surgical removal, electrocautery, curettage, cryotherapy, caustic solutions, x-ray treatment, and laser therapies are used."
+                },
+                {
+                    question: "Herpes zoster is caused by the varicella virus and has an affinity for which?",
+                    options: [
+                        "Sympathetic nerve fibers",
+                        "Parasympathetic nerve fibers",
+                        "Lateral and dorsal columns of the spinal cord",
+                        "Posterior root ganglia and posterior horn of the spinal cord"
+                    ],
+                    correct: 3,
+                    rationale: "The herpes zoster virus has an affinity for posterior root ganglia, the posterior horn of the spinal cord, and the skin."
+                },
+                {
+                    question: "Treatment for herpes simplex virus (type 1 or 2) includes which?",
+                    options: ["Corticosteroids", "Oral griseofulvin", "Oral antiviral agent", "Topical or systemic antibiotic"],
+                    correct: 2,
+                    rationale: "Oral antiviral agents are effective for viral infections such as herpes simplex. Corticosteroids, antibiotics, and griseofulvin (an antifungal agent) are not effective for viral infections."
+                },
+                {
+                    question: "What should the nurse explain about ringworm?",
+                    options: [
+                        "It is not contagious.",
+                        "It is a sign of uncleanliness.",
+                        "It is expected to resolve spontaneously.",
+                        "It is spread by both direct and indirect contact."
+                    ],
+                    correct: 3,
+                    rationale: "Ringworm is spread by both direct and indirect contact. Infected children should wear protective caps at night to avoid transfer of ringworm to bedding."
+                },
+                {
+                    question: "When giving instructions to a parent whose child has scabies, what should the nurse include?",
+                    options: [
+                        "Treat all family members if symptoms develop.",
+                        "Be prepared for symptoms to last 2 to 3 weeks.",
+                        "Carefully treat only areas where there is a rash.",
+                        "Notify practitioner so an antibiotic can be prescribed."
+                    ],
+                    correct: 1,
+                    rationale: "The mite responsible for the scabies will most likely be killed with the administration of medications. It will take 2 to 3 weeks for the stratum corneum to heal."
+                },
+                {
+                    question: "Which is usually the only symptom of pediculosis capitis (head lice)?",
+                    options: ["Itching", "Vesicles", "Scalp rash", "Localized inflammatory response"],
+                    correct: 0,
+                    rationale: "Itching is generally the only manifestation of pediculosis capitis (head lice). Diagnosis is made by observation of the white eggs (nits) on the hair shaft."
+                },
+                {
+                    question: "The school reviewed the pediculosis capitis (head lice) policy and removed the 'no nit' requirement. The nurse explains that now, when a child is found to have nits, the parents must do which before the child can return to school?",
+                    options: [
+                        "No treatment is necessary with the policy change.",
+                        "Shampoo and then trim the child's hair to prevent reinfestation.",
+                        "The child can remain in school with treatment done at home.",
+                        "Treat the child with a shampoo to treat lice and comb with a fine-tooth comb every day until nits are eliminated."
+                    ],
+                    correct: 2,
+                    rationale: "Many children have missed significant amounts of school time with 'no nit' policies. The child should be appropriately treated with a pediculicide and a fine-tooth comb."
+                },
+                {
+                    question: "The nurse should know what about Lyme disease?",
+                    options: [
+                        "Very difficult to prevent",
+                        "Easily treated with oral antibiotics in stages 1, 2, and 3",
+                        "Caused by a spirochete that enters the skin through a tick bite",
+                        "Common in geographic areas where the soil contains the mycotic spores that cause the disease"
+                    ],
+                    correct: 2,
+                    rationale: "Lyme disease is caused by Borrelia burgdorferi, a spirochete spread by ticks. The early characteristic rash is erythema migrans."
+                },
+                {
+                    question: "The nurse is teaching a new nurse about standard precautions. Which statement made by the student indicates a need for further teaching?",
+                    options: [
+                        "'I will use precautions when I give an infant oral care.'",
+                        "'I will use precautions when I change an infant's diaper.'",
+                        "'I will use precautions when I come in contact with blood and body fluids.'",
+                        "'I will use precautions when administering oral medications to a school-age child.'"
+                    ],
+                    correct: 3,
+                    rationale: "Standard precautions involve the use of barrier protection to prevent contamination from blood, all body fluids, secretions, and excretions except sweat. Further teaching is needed if the student indicates the need to use precautions when administering an oral medication to a school-age child."
+                },
+                {
+                    question: "The nurse is preparing an airborne infection isolation room for a patient. Which communicable disease does the patient likely have?",
+                    options: ["Varicella", "Pertussis", "Influenza", "Scarlet fever"],
+                    correct: 0,
+                    rationale: "An airborne infection isolation room is the isolation for persons with a suspected or confirmed airborne infectious disease transmitted by the airborne route such as measles, varicella, or tuberculosis."
+                },
+                {
+                    question: "An infant with respiratory syncytial virus (RSV) is being admitted to the hospital. The nurse should plan to place the infant on which precaution?",
+                    options: ["Enteric", "Airborne", "Droplet", "Contact"],
+                    correct: 3,
+                    rationale: "A patient with RSV is placed on contact precautions. The transmission of RSV is by contact of secretions, not by droplets or airborne."
+                },
+                {
+                    question: "The nurse is administering the first hepatitis A vaccine to an 18-month-old child. When should the child return to the clinic for the second dose of hepatitis A vaccination?",
+                    options: ["After 2 months", "After 3 months", "After 4 months", "After 6 months"],
+                    correct: 3,
+                    rationale: "Hepatitis A vaccine is now recommended for all children beginning at age 1 year. The second dose in the two-dose series may be administered no sooner than 6 months after the first dose."
+                },
+                {
+                    question: "The nurse is preparing to administer a measles, mumps, rubella, and varicella (MMRV) vaccine. Which is a contraindication associated with administering this vaccine?",
+                    options: [
+                        "The child has recently been exposed to an infectious disease.",
+                        "The child has symptoms of a cold but no fever.",
+                        "The child is having intermittent episodes of diarrhea.",
+                        "The child has a disorder that causes a deficient immune system."
+                    ],
+                    correct: 3,
+                    rationale: "The MMRV vaccine is an attenuated live virus vaccine. Children with deficient immune systems should not receive the MMRV vaccine because of a lack of evidence of its safety in this population."
+                },
+                {
+                    question: "An immunocompromised child has been exposed to chickenpox. What should the nurse anticipate to be prescribed to the exposed child?",
+                    options: [
+                        "Acyclovir (Zovirax)",
+                        "Valacyclovir (Valtrex)",
+                        "Amantadine (Symmetrel)",
+                        "Varicella-zoster immune globulin"
+                    ],
+                    correct: 3,
+                    rationale: "The use of varicella-zoster immune globulin or immune globulin intravenous (IGIV) is recommended for children who are immunocompromised, who have no previous history of varicella, and who are likely to contract the disease."
+                },
+                {
+                    question: "The clinic nurse is instructing parents about caring for a toddler with ascariasis (common roundworm). Which statement made by the parents indicates a need for further teaching?",
+                    options: [
+                        "'We will wash our hands often, especially after diaper changes.'",
+                        "'We know that roundworm can be transmitted from person to person.'",
+                        "'We will be sure to continue the nitazoxanide (Alinia) orally for 3 days.'",
+                        "'We will bring a stool sample to the clinic for examination in 2 weeks.'"
+                    ],
+                    correct: 1,
+                    rationale: "Ascariasis (common roundworm) is transferred to the mouth by way of contaminated food, fingers, or toys. Further teaching is needed if parents state it is transmitted from person to person."
+                },
+                {
+                    question: "The nurse is assessing a child suspected of having pinworms. Which is the most common symptom the nurse expects to assess?",
+                    options: ["Restlessness", "Distractibility", "Rectal discharge", "Intense perianal itching"],
+                    correct: 3,
+                    rationale: "Intense perianal itching is the principal symptom of pinworms. Restlessness and distractibility may be nonspecific symptoms."
+                },
+                {
+                    question: "A child has been diagnosed with giardiasis. Which prescribed medication should the nurse expect to administer?",
+                    options: [
+                        "Acyclovir (Zovirax)",
+                        "Metronidazole (Flagyl)",
+                        "Erythromycin (Pediazole)",
+                        "Azithromycin (Zithromax)"
+                    ],
+                    correct: 1,
+                    rationale: "Metronidazole is an antibiotic effective against anaerobic bacteria and certain parasites. It is prescribed to treat giardiasis."
+                },
+                {
+                    question: "A child has been diagnosed with scabies. Which statement by the parent indicates understanding of the nurse's teaching about scabies?",
+                    options: [
+                        "'The itching will stop after the cream is applied.'",
+                        "'We will complete extensive aggressive housecleaning.'",
+                        "'We will apply the cream to only the affected areas as directed.'",
+                        "'Everyone who has been in close contact with my child will need to be treated.'"
+                    ],
+                    correct: 3,
+                    rationale: "Because of the length of time between infestation and physical symptoms (30 to 60 days), all persons who were in close contact with the affected child need treatment."
+                },
+                {
+                    question: "An 18-month-old child has been diagnosed with pediculosis capitis (head lice). Which prescription should the nurse question if ordered for the child?",
+                    options: [
+                        "Malathion (Ovide)",
+                        "Permethrin 1% (Nix)",
+                        "Benzyl alcohol 5% lotion",
+                        "Pyrethrin with piperonyl butoxide (RID)"
+                    ],
+                    correct: 0,
+                    rationale: "The nurse should question malathion for an 18-month-old child. Malathion contains flammable alcohol, must remain in contact with the scalp for 8 to 12 hours, and is not recommended for children younger than 2 years of age."
+                },
+                {
+                    question: "A child has been diagnosed with cat scratch disease. The nurse explains which characteristics about this disease?",
+                    options: [
+                        "The disease is usually a benign, self-limiting illness.",
+                        "The animal that transmitted the disease will also be ill.",
+                        "The disease is treated with a 5-day course of oral azithromycin.",
+                        "Symptoms include pruritus, especially at the site of inoculation."
+                    ],
+                    correct: 0,
+                    rationale: "The disease is usually a benign, self-limiting illness that resolves spontaneously in 4 to 6 weeks. The animals are not ill during the time they transmit the disease."
+                }
+            ],
+            
+            'multiple-response': [
+                {
+                    question: "The nurse is planning care for a child with chickenpox (varicella). Which prescribed supportive measures should the nurse plan to implement? (Select all that apply.)",
+                    options: [
+                        "Administration of acyclovir (Zovirax)",
+                        "Administration of azithromycin (Zithromax)",
+                        "Administration of Vitamin A supplementation",
+                        "Administration of acetaminophen (Tylenol) for fever",
+                        "Administration of diphenhydramine (Benadryl) for itching"
+                    ],
+                    correct: [0, 3, 4],
+                    rationale: "Chickenpox is a virus, and acyclovir is ordered to lessen the symptoms. Benadryl and Tylenol are prescribed as supportive treatments. Vitamin A supplementation is used for treating rubeola. Zithromax is an antibiotic prescribed for bacterial infections such as pertussis."
+                },
+                {
+                    question: "The nurse is planning care for an infant with candidiasis (moniliasis) diaper dermatitis. Which topical ointments may be prescribed for the patient? (Select all that apply.)",
+                    options: ["Nystatin", "Bactroban", "Neosporin", "Miconazole", "Clotrimazole"],
+                    correct: [0, 3, 4],
+                    rationale: "Candidiasis diaper dermatitis skin lesions are treated with topical nystatin, miconazole, and clotrimazole. Bactroban and Neosporin are used to treat bacterial dermatitides."
+                },
+                {
+                    question: "The nurse is conducting discharge teaching to an adolescent with a methicillin-resistant staphylococcus aureus (MRSA) infection. What should the nurse include in the instructions? (Select all that apply.)",
+                    options: [
+                        "Avoid sharing of towels and washcloths.",
+                        "Launder clothes and bedding in cold water.",
+                        "Use bleach when laundering towels and washcloths.",
+                        "Take a daily bath or shower with an antibacterial soap.",
+                        "Apply mupirocin (Bactroban) to the nares twice a day for 2 to 4 weeks."
+                    ],
+                    correct: [0, 3, 4],
+                    rationale: "For MRSA infection, the adolescent should be provided with washcloths and towels separate from those of other family members. Daily bathing or showering with an antibacterial soap is also recommended. Mupirocin should be applied to the nares of those with MRSA infection twice daily for 2 to 4 weeks."
+                },
+                {
+                    question: "The clinic nurse is reviewing the immunization guidelines for hepatitis B. Which are true of the guidelines for this vaccine? (Select all that apply.)",
+                    options: [
+                        "The hepatitis B vaccination series should be begun at birth.",
+                        "The adolescent not vaccinated at birth does not have a need to be vaccinated.",
+                        "Any child not vaccinated at birth should receive two doses at least 4 months apart.",
+                        "An unimmunized 10-year-old child should receive three doses administered 4 weeks apart."
+                    ],
+                    correct: [0, 3],
+                    rationale: "Current immunization guidelines for hepatitis B vaccination recommend beginning the hepatitis B vaccine series at birth or, in unimmunized children, as soon as possible. Children younger than 11 years of age may be vaccinated with a three-dose series, administered 4 weeks apart."
+                },
+                {
+                    question: "The nurse is planning to administer immunizations to a 6-month-old infant. Which interventions should the nurse implement to minimize local reactions from the vaccines? (Select all that apply.)",
+                    options: [
+                        "Select a needle length of 1 inch.",
+                        "Administer in the deltoid muscle.",
+                        "Inject the vaccine into the vastus lateralis.",
+                        "Draw the vaccine up from a vial with a filter needle.",
+                        "Change the needle on the syringe after drawing up the vaccine and before injecting."
+                    ],
+                    correct: [0, 2],
+                    rationale: "To minimize local reactions from vaccines, the nurse should select a needle of adequate length (25 mm [1 inch] in infants) to deposit the antigen deep in the muscle mass and inject it into the vastus lateralis muscle."
+                },
+                {
+                    question: "The nurse is preparing to admit a 5-year-old child who developed lesions of varicella (chickenpox) 3 days ago. Which clinical manifestations of varicella should the nurse expect to observe? (Select all that apply.)",
+                    options: [
+                        "Nonpruritic rash",
+                        "Elevated temperature",
+                        "Discrete rose pink rash",
+                        "Vesicles surrounded by an erythematous base",
+                        "Centripetal rash in all three stages (papule, vesicle, and crust)"
+                    ],
+                    correct: [1, 3, 4],
+                    rationale: "The clinical manifestations of varicella include elevated temperature, vesicles surrounded by an erythematous base, and a centripetal rash in all three stages (papule, vesicle, and crust). The rash is pruritic, and a discrete pink rash is seen with exanthema subitum, not varicella."
+                },
+                {
+                    question: "The nurse is preparing to admit a 1-year-old child with pertussis (whooping cough). Which clinical manifestations of pertussis should the nurse expect to observe? (Select all that apply.)",
+                    options: ["Earache", "Coryza", "Conjunctivitis", "Low-grade fever", "Dry hacking cough"],
+                    correct: [1, 3, 4],
+                    rationale: "The clinical manifestations of pertussis include coryza, a low-grade fever, and a dry hacking cough. The child does not have an earache or conjunctivitis."
+                },
+                {
+                    question: "The nurse is preparing to admit a 2-year-old child with rubella (German measles). Which clinical manifestations of rubella should the nurse expect to observe? (Select all that apply.)",
+                    options: [
+                        "Sore throat",
+                        "Conjunctivitis",
+                        "Koplik spots",
+                        "Lymphadenopathy",
+                        "Discrete, pinkish red maculopapular exanthema"
+                    ],
+                    correct: [0, 1, 3, 4],
+                    rationale: "The clinical manifestations of rubella include a sore throat; conjunctivitis; lymphadenopathy; and a discrete, pinkish red maculopapular exanthema. Koplik spots occur in measles but not rubella."
+                },
+                {
+                    question: "The clinic nurse is assessing a child with bacterial conjunctivitis (pink eye). Which assessment findings should the nurse expect? (Select all that apply.)",
+                    options: [
+                        "Itching",
+                        "Swollen eyelids",
+                        "Inflamed conjunctiva",
+                        "Purulent eye drainage",
+                        "Crusting of eyelids in the morning"
+                    ],
+                    correct: [1, 2, 3, 4],
+                    rationale: "The assessment findings in bacterial conjunctivitis include swollen eyelids, inflamed conjunctiva, purulent eye drainage, and crusting of eyelids in the morning. Itching is seen with allergic conjunctivitis but not with bacterial conjunctivitis."
+                },
+                {
+                    question: "The clinic nurse is assessing a child with a heavy ascariasis lumbricoides (common roundworm) infection. Which assessment findings should the nurse expect? (Select all that apply.)",
+                    options: ["Anemia", "Anorexia", "Irritability", "Intestinal colic", "Enlarged abdomen"],
+                    correct: [1, 2, 3, 4],
+                    rationale: "The assessment findings in a heavy ascariasis lumbricoides infection include anorexia, irritability, intestinal colic, and an enlarged abdomen. Anemia is seen in hookworm infections but not ascariasis."
+                }
+            ],
+            
+            'matching': [
+                {
+                    question: "Which type of immunity is defined as a state in which immune bodies are actively formed against specific antigens, either naturally by having had the disease or artificially through vaccination?",
+                    options: ["Natural immunity", "Acquired immunity", "Active immunity", "Passive immunity", "Herd immunity"],
+                    correct: 2,
+                    rationale: "This describes active immunity, where the individual's own immune system is stimulated to produce antibodies and memory cells. This can occur from natural infection ('having had the disease') or from an artificial exposure like a vaccine."
+                },
+                {
+                    question: "Which term describes a protective phenomenon where a sufficiently high proportion of a population is immune to a disease (typically through vaccination), thereby stopping its spread and protecting those who are not immune?",
+                    options: ["Natural immunity", "Acquired immunity", "Active immunity", "Passive immunity", "Herd immunity"],
+                    correct: 4,
+                    rationale: "This is the classic definition of herd immunity (or community immunity). It prevents outbreaks by reducing the overall amount of virus or bacteria circulating, breaking the chain of transmission and protecting vulnerable individuals who cannot be vaccinated."
+                },
+                {
+                    question: "Which term refers to the non-specific, innate resistance to infection that an individual is born with, such as skin barriers, stomach acid, and generic immune cells?",
+                    options: ["Natural immunity", "Acquired immunity", "Active immunity", "Passive immunity", "Herd immunity"],
+                    correct: 0,
+                    rationale: "Natural immunity (or innate immunity) is the body's first line of general defense. It is present from birth and is not specific to any particular pathogen."
+                },
+                {
+                    question: "Which broad category of immunity results from the body developing a specific immune response after exposure to an invading agent, such as a bacteria, virus, or toxin?",
+                    options: ["Natural immunity", "Acquired immunity", "Active immunity", "Passive immunity", "Herd immunity"],
+                    correct: 1,
+                    rationale: "Acquired immunity is the umbrella term for immunity gained after birth. It encompasses both active immunity (where the body makes its own antibodies) and passive immunity (where antibodies are received from another source). The key is that it is developed in response to specific antigen exposure."
+                },
+                {
+                    question: "Which type of immunity describes the short-term protection provided when pre-formed antibodies are transferred from one individual to another, such as from mother to fetus via the placenta?",
+                    options: ["Natural immunity", "Acquired immunity", "Active immunity", "Passive immunity", "Herd immunity"],
+                    correct: 3,
+                    rationale: "This is passive immunity. The recipient receives antibodies but does not produce them itself. This provides immediate but temporary protection. Examples include maternal antibodies and treatments like immune globulin injections."
+                }
+            ],
+            
+            'all': []
+        };
+
+        // Combine all questions for the 'all' section
+        sections['all'] = [
+            ...sections['multiple-choice'].map(q => ({...q, section: 'multiple-choice'})),
+            ...sections['multiple-response'].map(q => ({...q, section: 'multiple-response'})),
+            ...sections['matching'].map(q => ({...q, section: 'matching', isMatching: true}))
+        ];
+
+        let currentSection = 'multiple-choice';
+        let currentQuestion = 0;
+        let selectedOption = null;
+        let selectedOptions = [];
+        let isSubmitted = false;
+        let answers = {
+            'multiple-choice': Array(sections['multiple-choice'].length).fill(null),
+            'multiple-response': Array(sections['multiple-response'].length).fill({selected: [], submitted: false}),
+            'matching': Array(sections['matching'].length).fill(null),
+            'all': Array(sections['all'].length).fill(null)
+        };
+
+        function setSection(section) {
+            currentSection = section;
+            currentQuestion = 0;
+            selectedOption = null;
+            selectedOptions = [];
+            isSubmitted = false;
+            
+            document.querySelectorAll('.section-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            loadQuestion();
+        }
+
+        function isMultipleResponseQuestion() {
+            if (currentSection === 'all') {
+                const questionData = getCurrentQuestionData();
+                return questionData?.section === 'multiple-response' || Array.isArray(questionData?.correct);
+            }
+            return currentSection === 'multiple-response';
+        }
+
+        function isMatchingSection() {
+            if (currentSection === 'all') {
+                const questionData = getCurrentQuestionData();
+                return questionData?.isMatching || questionData?.section === 'matching';
+            }
+            return currentSection === 'matching';
+        }
+
+        function getCurrentQuestionData() {
+            if (currentSection === 'all') {
+                return sections['all'][currentQuestion] || null;
+            } else {
+                return sections[currentSection][currentQuestion];
+            }
+        }
+
+        function loadQuestion() {
+            const questionData = getCurrentQuestionData();
+            
+            if (!questionData) return;
+            
+            const isMatching = isMatchingSection();
+            const isMultipleResponse = isMultipleResponseQuestion();
+            
+            // Update UI elements visibility
+            document.getElementById('matchingContainer').style.display = isMatching ? 'flex' : 'none';
+            document.getElementById('options').style.display = isMatching ? 'none' : 'flex';
+            document.getElementById('multipleSelectIndicator').style.display = isMultipleResponse ? 'block' : 'none';
+            document.getElementById('multipleSelectInstructions').style.display = isMultipleResponse ? 'block' : 'none';
+            document.getElementById('cancelBtn').classList.remove('show');
+            document.getElementById('submitBtn').style.display = isMultipleResponse ? 'flex' : 'none';
+            document.getElementById('questionNumber').textContent = currentQuestion + 1;
+            
+            let totalQuestions = getTotalQuestions();
+            
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('counter').textContent = `${currentQuestion + 1}/${totalQuestions}`;
+            
+            if (isMatching) {
+                document.getElementById('matchingQuestion').textContent = questionData.question;
+                loadMatchingOptions(questionData);
+            } else {
+                document.getElementById('question').textContent = questionData.question;
+                loadOptions(questionData);
+            }
+            
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('rationale').classList.remove('show');
+            
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            const isLastQuestion = currentQuestion >= totalQuestions - 1;
+            document.getElementById('nextBtn').textContent = isLastQuestion ? 'Finish ➡️' : 'Next ➡️';
+            document.getElementById('nextBtn').disabled = true;
+            
+            // Load saved answer state
+            const storedAnswer = answers[currentSection][currentQuestion];
+            if (storedAnswer !== null && storedAnswer !== undefined) {
+                if (isMultipleResponse) {
+                    selectedOptions = storedAnswer.selected || [];
+                    isSubmitted = storedAnswer.submitted || false;
+                    
+                    if (isSubmitted) {
+                        showFeedbackForMultipleResponse(questionData);
+                        document.getElementById('nextBtn').disabled = false;
+                        document.getElementById('submitBtn').disabled = true;
+                    } else {
+                        highlightSelectedOptionsForMultipleResponse();
+                        document.getElementById('submitBtn').disabled = selectedOptions.length === 0;
+                        document.getElementById('nextBtn').disabled = false;
+                        if (selectedOptions.length > 0) {
+                            document.getElementById('cancelBtn').classList.add('show');
+                        }
+                    }
+                } else if (isMatching) {
+                    selectedOption = storedAnswer;
+                    highlightMatchingOption(storedAnswer, questionData);
+                    showFeedback(storedAnswer, questionData);
+                    document.getElementById('nextBtn').disabled = false;
+                    document.getElementById('cancelBtn').classList.add('show');
+                } else {
+                    selectedOption = storedAnswer;
+                    highlightSelectedOption(storedAnswer, questionData);
+                    showFeedback(storedAnswer, questionData);
+                    document.getElementById('nextBtn').disabled = false;
+                    document.getElementById('cancelBtn').classList.add('show');
+                }
+            } else {
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                if (isMultipleResponse) {
+                    document.getElementById('submitBtn').disabled = true;
+                }
+            }
+        }
+
+        function loadMatchingOptions(questionData) {
+            const matchingOptions = document.getElementById('matchingOptions');
+            matchingOptions.innerHTML = '';
+            
+            if (questionData.options) {
+                questionData.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'matching-option';
+                    optionDiv.textContent = `${String.fromCharCode(65 + index)}) ${option}`;
+                    optionDiv.onclick = () => selectMatchingOption(index, questionData);
+                    matchingOptions.appendChild(optionDiv);
+                });
+                
+                const storedAnswer = answers[currentSection][currentQuestion];
+                if (storedAnswer !== null && storedAnswer !== undefined) {
+                    highlightMatchingOption(storedAnswer, questionData);
+                }
+            }
+        }
+
+        function loadOptions(questionData) {
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            if (questionData.options && questionData.options.length > 0) {
+                questionData.options.forEach((option, index) => {
+                    const optionElement = document.createElement('div');
+                    optionElement.className = 'option';
+                    optionElement.innerHTML = `
+                        <div class="option-letter">${String.fromCharCode(65 + index)}</div>
+                        <div class="option-text">${option}</div>
+                    `;
+                    optionElement.onclick = () => selectOption(index, questionData);
+                    optionsContainer.appendChild(optionElement);
+                });
+            } else {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                optionElement.innerHTML = `
+                    <div class="option-letter">A</div>
+                    <div class="option-text">No options available for this question</div>
+                `;
+                optionsContainer.appendChild(optionElement);
+            }
+        }
+
+        function selectOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            if (isMultipleResponseQuestion()) {
+                handleMultipleResponseSelect(index, questionData);
+            } else {
+                handleSingleSelect(index, questionData);
+            }
+        }
+
+        function handleSingleSelect(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            answers[currentSection][currentQuestion] = index;
+            selectedOption = index;
+            
+            highlightSelectedOption(index, questionData);
+            showFeedback(index, questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.add('show');
+        }
+
+        function handleMultipleResponseSelect(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            if (isSubmitted) return;
+            
+            const optionIndex = selectedOptions.indexOf(index);
+            if (optionIndex === -1) {
+                selectedOptions.push(index);
+            } else {
+                selectedOptions.splice(optionIndex, 1);
+            }
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (selectedOptions.includes(i)) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            if (!answers[currentSection][currentQuestion]) {
+                answers[currentSection][currentQuestion] = {selected: [], submitted: false};
+            }
+            answers[currentSection][currentQuestion].selected = selectedOptions;
+            answers[currentSection][currentQuestion].submitted = false;
+            
+            document.getElementById('submitBtn').disabled = selectedOptions.length === 0;
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.toggle('show', selectedOptions.length > 0);
+        }
+
+        function selectMatchingOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            answers[currentSection][currentQuestion] = index;
+            selectedOption = index;
+            
+            document.querySelectorAll('.matching-option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            const selectedOptionElement = document.querySelectorAll('.matching-option')[index];
+            selectedOptionElement.classList.add('selected');
+            
+            if (index === questionData.correct) {
+                selectedOptionElement.classList.add('correct');
+            } else {
+                selectedOptionElement.classList.add('incorrect');
+                document.querySelectorAll('.matching-option')[questionData.correct].classList.add('correct');
+            }
+            
+            showFeedback(index, questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('cancelBtn').classList.add('show');
+        }
+
+        function highlightMatchingOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const options = document.querySelectorAll('.matching-option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (i === index) {
+                    option.classList.add('selected');
+                    if (i === questionData.correct) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                        options[questionData.correct].classList.add('correct');
+                    }
+                }
+            });
+        }
+
+        function highlightSelectedOption(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                
+                if (i === index) {
+                    if (i === questionData.correct) {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('incorrect');
+                        if (questionData.correct !== undefined) {
+                            options[questionData.correct].classList.add('correct');
+                        }
+                    }
+                }
+            });
+        }
+
+        function highlightSelectedOptionsForMultipleResponse() {
+            const options = document.querySelectorAll('.option');
+            
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (selectedOptions.includes(i)) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function submitAnswer() {
+            if (selectedOptions.length === 0) return;
+            
+            isSubmitted = true;
+            
+            if (!answers[currentSection][currentQuestion]) {
+                answers[currentSection][currentQuestion] = {selected: [], submitted: false};
+            }
+            answers[currentSection][currentQuestion].submitted = true;
+            
+            const questionData = getCurrentQuestionData();
+            showFeedbackForMultipleResponse(questionData);
+            document.getElementById('nextBtn').disabled = false;
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('cancelBtn').classList.remove('show');
+        }
+
+        function showFeedback(index, questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const rationale = document.getElementById('rationale');
+            const rationaleText = document.getElementById('rationaleText');
+            
+            if (index === questionData.correct) {
+                feedback.className = 'feedback correct';
+                feedbackIcon.textContent = '✅';
+                feedbackText.textContent = 'Correct! Well done.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '❌';
+                const correctLetter = String.fromCharCode(65 + questionData.correct);
+                feedbackText.textContent = `Incorrect. Correct: ${correctLetter}`;
+            }
+            
+            feedback.style.display = 'flex';
+            rationaleText.textContent = questionData.rationale;
+            rationale.classList.add('show');
+        }
+
+        function showFeedbackForMultipleResponse(questionData) {
+            if (!questionData) questionData = getCurrentQuestionData();
+            
+            const feedback = document.getElementById('feedback');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackText = document.getElementById('feedbackText');
+            const rationale = document.getElementById('rationale');
+            const rationaleText = document.getElementById('rationaleText');
+            
+            const allCorrectSelected = questionData.correct.every(c => selectedOptions.includes(c));
+            const noIncorrectSelected = selectedOptions.every(s => questionData.correct.includes(s));
+            
+            const options = document.querySelectorAll('.option');
+            options.forEach((option, i) => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+                if (questionData.correct.includes(i)) {
+                    option.classList.add('correct');
+                }
+                if (selectedOptions.includes(i) && !questionData.correct.includes(i)) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            if (allCorrectSelected && noIncorrectSelected) {
+                feedback.className = 'feedback correct';
+                feedbackIcon.textContent = '✅';
+                feedbackText.textContent = 'Perfect! All correct selected.';
+            } else if (allCorrectSelected && !noIncorrectSelected) {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '⚠️';
+                feedbackText.textContent = 'Almost! All correct + some incorrect.';
+            } else if (!allCorrectSelected && noIncorrectSelected) {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '⚠️';
+                feedbackText.textContent = 'Partially correct! Some correct, missed others.';
+            } else {
+                feedback.className = 'feedback incorrect';
+                feedbackIcon.textContent = '❌';
+                feedbackText.textContent = 'Incorrect. Missed correct & selected incorrect.';
+            }
+            
+            feedback.style.display = 'flex';
+            rationaleText.textContent = questionData.rationale;
+            rationale.classList.add('show');
+        }
+
+        function cancelSelection() {
+            const questionData = getCurrentQuestionData();
+            
+            if (isMultipleResponseQuestion()) {
+                selectedOptions = [];
+                isSubmitted = false;
+                
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                if (answers[currentSection][currentQuestion]) {
+                    answers[currentSection][currentQuestion] = {selected: [], submitted: false};
+                }
+                
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('rationale').classList.remove('show');
+                document.getElementById('cancelBtn').classList.remove('show');
+            } else if (isMatchingSection()) {
+                answers[currentSection][currentQuestion] = null;
+                selectedOption = null;
+                
+                document.querySelectorAll('.matching-option').forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('rationale').classList.remove('show');
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('cancelBtn').classList.remove('show');
+            } else {
+                answers[currentSection][currentQuestion] = null;
+                selectedOption = null;
+                
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.classList.remove('selected', 'correct', 'incorrect');
+                });
+                
+                document.getElementById('feedback').style.display = 'none';
+                document.getElementById('rationale').classList.remove('show');
+                document.getElementById('nextBtn').disabled = true;
+                document.getElementById('cancelBtn').classList.remove('show');
+            }
+        }
+
+        function nextCard() {
+            const totalQuestions = getTotalQuestions();
+            
+            if (currentQuestion < totalQuestions - 1) {
+                currentQuestion++;
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                loadQuestion();
+            } else {
+                let correctCount = 0;
+                let totalAnswered = 0;
+                
+                Object.keys(answers).forEach(section => {
+                    answers[section].forEach((answer, index) => {
+                        if (answer !== null && answer !== undefined) {
+                            totalAnswered++;
+                            const questionData = getQuestionData(section, index);
+                            
+                            if (Array.isArray(questionData?.correct)) {
+                                if (answer.submitted && Array.isArray(answer.selected)) {
+                                    const allCorrect = questionData.correct.every(c => answer.selected.includes(c));
+                                    const noIncorrect = answer.selected.every(s => questionData.correct.includes(s));
+                                    if (allCorrect && noIncorrect) correctCount++;
+                                }
+                            } else if (questionData?.isMatching || questionData?.section === 'matching') {
+                                if (answer === questionData.correct) correctCount++;
+                            } else {
+                                if (answer === questionData?.correct) correctCount++;
+                            }
+                        }
+                    });
+                });
+                
+                alert(`Quiz completed!\n\nAnswered: ${totalAnswered}\nCorrect: ${correctCount}\n\nClick OK to restart.`);
+                
+                currentSection = 'multiple-choice';
+                currentQuestion = 0;
+                selectedOption = null;
+                selectedOptions = [];
+                isSubmitted = false;
+                answers = {
+                    'multiple-choice': Array(sections['multiple-choice'].length).fill(null),
+                    'multiple-response': Array(sections['multiple-response'].length).fill({selected: [], submitted: false}),
+                    'matching': Array(sections['matching'].length).fill(null),
+                    'all': Array(sections['all'].length).fill(null)
+                };
+                
+                setSection('multiple-choice');
+            }
+        }
+
+        function previousCard() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                const storedAnswer = answers[currentSection][currentQuestion];
+                
+                if (isMultipleResponseQuestion()) {
+                    selectedOptions = storedAnswer?.selected || [];
+                    isSubmitted = storedAnswer?.submitted || false;
+                } else {
+                    selectedOption = storedAnswer;
+                }
+                
+                loadQuestion();
+            }
+        }
+
+        function getTotalQuestions() {
+            if (currentSection === 'all') {
+                return sections['all'].length;
+            } else {
+                return sections[currentSection].length;
+            }
+        }
+
+        function getQuestionData(section, index) {
+            if (section === 'all') {
+                return sections['all'][index];
+            } else {
+                return sections[section][index];
+            }
+        }
+
+        // Initialize
+        setSection('multiple-choice');
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key >= '1' && event.key <= '5') {
+                const index = parseInt(event.key) - 1;
+                const questionData = getCurrentQuestionData();
+                if (!isMatchingSection()) {
+                    selectOption(index, questionData);
+                }
+            } else if (event.key >= 'a' && event.key <= 'e') {
+                const index = event.key.charCodeAt(0) - 97;
+                const questionData = getCurrentQuestionData();
+                if (!isMatchingSection()) {
+                    selectOption(index, questionData);
+                }
+            } else if (event.key === 'Enter' && isMultipleResponseQuestion()) {
+                if (selectedOptions.length > 0 && !isSubmitted) {
+                    submitAnswer();
+                }
+            } else if (event.key === 'ArrowLeft') {
+                if (!document.getElementById('prevBtn').disabled) {
+                    previousCard();
+                }
+            } else if (event.key === 'ArrowRight') {
+                if (!document.getElementById('nextBtn').disabled) {
+                    nextCard();
+                }
+            } else if (event.key === ' ' || event.key === 'Spacebar') {
+                if (!document.getElementById('nextBtn').disabled && !isMultipleResponseQuestion()) {
+                    nextCard();
+                }
+            } else if (event.key === 'Escape') {
+                cancelSelection();
+            }
+        });
+    </script>
+</body>
+</html>
